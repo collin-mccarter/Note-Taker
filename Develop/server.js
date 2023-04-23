@@ -1,47 +1,46 @@
 // Setting up dependencies
-const express = require("express");
-const path = require("path");
-const fs = require("fs");
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
 
 // Setting up Express
-const app = express()
-const PORT = process.env.PORT || 3001
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: true}))
-app.use(express.json())
-app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+app.use(express.static("public"));
 
 // Start server
-app.listen(PORT, () => 
-console.log(`Notes App Is Live at ${PORT}`))
+app.listen(PORT, () => console.log(`Notes App Is Live at ${PORT}`));
 
 // Creating a API GET
-const notes = require("./db/db.json")
-app.get("/api/notes", (req,res) => res.json(notes))
+const notes = require("./db/db.json");
+app.get("/api/notes", (req,res) => res.json(notes));
 
 // API POST
 app.post("/api/notes", (req,res) => {
-    notes.push(req.body)
+    notes.push(req.body);
     
-    let id = 1
+    let id = 1;
     
     notes.forEach((notes) => {
-        notes.id = id
-        id++
-        return notes
-    })
+        notes.id = id;
+        id++;
+        return notes;
+    });
 
     res.json(true);
 
     fs.writeFile("db/db.json", JSON.stringify(notes), (err) => {
-        if(err) throw err
+        if(err) throw err;
     })
 
-    res.end()
+    res.end();
 })
 
-app.delete("/api/notes/:id", function (req,res) {
-    const deleteNote = req.params.id
+app.delete("/api/notes.html/:id", function (req,res) {
+    const deleteNote = req.params.id;
     for(let i = 0; i < notes.length; i++) {
         if (notes[i].id === Number(deleteNote)) {
             notes.splice(i,1);
@@ -50,16 +49,16 @@ app.delete("/api/notes/:id", function (req,res) {
         fs.writeFile("db/db.json", JSON.stringify(notes), (err) => {
             if(err) throw err;
         })
-        res.end()
+        res.end();
     }
 })
 
 // HTML GET
-app.get("/notes", (req,res) => {
+app.get("/notes.html", (req,res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"))
-})
+});
 
 // Default to home
 app.get("*", (req,res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
-})
+});
