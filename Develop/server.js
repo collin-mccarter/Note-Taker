@@ -5,7 +5,7 @@ const fs = require("fs");
 
 // Setting up Express
 const app = express()
-const PORT = prpcess.env.PORT || 3001
+const PORT = process.env.PORT || 3001
 
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
@@ -33,7 +33,7 @@ app.post("/api/notes", (req,res) => {
 
     res.json(true);
 
-    fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+    fs.writeFile("db/db.json", JSON.stringify(notes), (err) => {
         if(err) throw err
     })
 
@@ -47,7 +47,7 @@ app.delete("/api/notes/:id", function (req,res) {
             notes.splice(i,1);
         }
 
-        fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+        fs.writeFile("db/db.json", JSON.stringify(notes), (err) => {
             if(err) throw err;
         })
         res.end()
@@ -55,7 +55,7 @@ app.delete("/api/notes/:id", function (req,res) {
 })
 
 // HTML GET
-app.get("./notes", (req,res) => {
+app.get("/notes", (req,res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"))
 })
 
