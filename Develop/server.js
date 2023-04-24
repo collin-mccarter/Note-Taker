@@ -24,6 +24,7 @@ app.post("/api/notes", (req,res) => {
     
     let id = 1;
     
+    // assigning id for notes
     notes.forEach((notes) => {
         notes.id = id;
         id++;
@@ -39,6 +40,7 @@ app.post("/api/notes", (req,res) => {
     res.end();
 })
 
+// Creating a delete function
 app.delete("/api/notes.html/:id", function (req,res) {
     const deleteNote = req.params.id;
     for(let i = 0; i < notes.length; i++) {
