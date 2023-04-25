@@ -29,9 +29,9 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ## Screenshot of Deployment
 
-<img src="Develop/public/assets/screenshots/Title-Deployed.png" width="500px">
-<img src="Develop/public/assets/screenshots/Notes-Start.png" width="500px">
-<img src="Develop/public/assets/screenshots/Notes-Filled.png" width="500px">
+<img src="public/assets/screenshots/Title-Deployed.png" width="500px">
+<img src="public/assets/screenshots/Notes-Start.png" width="500px">
+<img src="public/assets/screenshots/Notes-Filled.png" width="500px">
 
 ## Link to Deployed Application
 https://collin-note-taker.herokuapp.com/
