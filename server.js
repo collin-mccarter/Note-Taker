@@ -39,16 +39,12 @@ app.post("/api/notes", (req,res) => {
 
 // Creating a delete function
 app.delete("/api/notes/:id", function (req,res) {
+    console.log(req.params)
     const deleteNote = req.params.id;
     for(let i = 0; i < notes.length; i++) {
         if (notes[i].id === Number(deleteNote)) {
             notes.splice(i,1);
         }
-
-        fs.writeFile("db/db.json", JSON.stringify(notes), (err) => {
-            if(err) throw err;
-        })
-        res.end();
     }
 })
 
